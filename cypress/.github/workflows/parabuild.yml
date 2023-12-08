@@ -1,0 +1,43 @@
+name: Cypress Parallel execution
+
+on: [push, pull_request]
+
+jobs:
+  cypress-chrome:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Run Cypress tests on Chrome
+      run: |
+        npm run cy:run -- --browser chrome
+
+  cypress-firefox:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Run Cypress tests on Firefox
+      run: |
+        npm run cy:run -- --browser firefox
+
+    - name: Cypress Test Report
+      if: always()
+      uses: actions/upload-artifact@v3 
+      with:
+        name: Mochawesome HTML Report
+        path: cypress/reports/html     
+
+      
