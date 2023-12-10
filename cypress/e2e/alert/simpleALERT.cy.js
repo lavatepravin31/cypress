@@ -14,6 +14,7 @@ describe("test simple alert",()=>{
 
 
             cy.get('#result').should('have.text','You successfully clicked an alert')
+            cy.log ("pravinlavate")
         })
 
       
